@@ -17,11 +17,7 @@ public class PasswordGenerator {
 
 
     /**
-     * В методе создаются два объекта StringBuilder. Первый для добавления выбранных символов в пул, после чего
-     * преобразовываются в массив символов. Второй
-     * для генерации пароля. Так же создается объект SecureRandom для выбора случайных значений.
-     * Следом идет проверка на то, что выбран хотя бы один набор символов. После чего генерируется пароль
-     * и метод его возвращает.
+     * Метод генерирует пароль заданной длины с использованием выбранных параметров
      *
      * @param length Длина пароля
      * @param uppercase Использование символов верхнего регистра в генерируемом пароле
@@ -30,9 +26,14 @@ public class PasswordGenerator {
      * @param specialCharacters Использование специальных символов в генерируемом пароле
      * @return Возвращает сгенерированный пароль в фармате строки (String)
      * @throws IllegalArgumentException метод может выбросить исключение, если
-     * не выбран ни один набор символов
+     * не выбран ни один набор символов, или длина пароля меньше 1
      */
     public static String generatePassword(int length, boolean uppercase, boolean lowercase, boolean digits, boolean specialCharacters) {
+
+        if (length < 1) {
+            throw new IllegalArgumentException("Длина пароля должна быть больше 1 символа");
+        }
+
         SecureRandom random = new SecureRandom();
         StringBuilder password = new StringBuilder();
         StringBuilder charPool = new StringBuilder();
